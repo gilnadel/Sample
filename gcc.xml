@@ -1,0 +1,33 @@
+<ib_profile version="1">
+   <!--
+      Configuration files read and processed in the following order:
+      1. $PWD/ib_profile.xml
+      2. $HOME/.ib/ib_profile.xml
+      3. /etc/default/ib_profile.xml
+      4. /opt/incredibuild/data/ib_profile.xml
+
+      Each file can only add to the previous definitions, but can't overwrite them.
+      I.e. $PWD/ib_profile.xml has highest priority, $HOME/.ib/ib_profile.xml - next
+      and so on. 
+
+      These ib_profile.xml files will be read and processed in the above order,
+      until the first occurrence of ib_profile.xml that contains
+      ignore_following_profiles="true",
+      which will make it the last ib_profile.xml to be processed.
+
+      /opt/incredibuild/data/ib_profile.xml SHOULD NOT BE CHANGED -
+      ALL CHANGES WILL BE LOST AFTER UPGRADE
+   -->
+   <globals
+      ignore_following_profiles="false"
+      dummy_mode="false"
+      monitor_enable="false"
+      local_slot_priority="low"
+      requested_cores="10000"
+    />
+    <processes>
+       <process filename="make" type="intercepted" />
+       <!--process filename="gcc"  type="local_only" exclude_args="-c:-S:-E" /-->
+       <process filename="gcc"  type="allow_remote" />
+    </processes>
+</ib_profile>
